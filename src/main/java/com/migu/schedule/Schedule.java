@@ -7,6 +7,7 @@ import com.migu.schedule.info.TaskInfo;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -151,6 +152,7 @@ public class Schedule {
     	List<Task> tempList;
     	List<Integer> com=new ArrayList<Integer>();
     	tasks.clear();
+    	List<TaskInfo> taskstemp=new ArrayList<TaskInfo>();
         for(Integer key:nodes.keySet()){
         	tempList=nodes.get(key);
         	if(tempList!=null){
@@ -165,7 +167,8 @@ public class Schedule {
         	}
         }
         if(!tasks.isEmpty()){
-        	
+        		Comparator<TaskInfo> cmp11 = new ComparatorUser();
+        		 Collections.sort(tasks, cmp11);  
         	return ReturnCodeKeys.E015;
         }
         return ReturnCodeKeys.E016;
@@ -242,4 +245,16 @@ public class Schedule {
     	
     */}
     
+}
+
+class ComparatorUser implements Comparator<TaskInfo> {
+	  
+    public int compare(TaskInfo u1, TaskInfo u2) {  
+    	Integer i=u1.getTaskId();
+    	Integer j=u1.getTaskId();
+        // 先按年龄排序  
+        int flag = i.compareTo(j);
+        return flag;
+    }  
+
 }
